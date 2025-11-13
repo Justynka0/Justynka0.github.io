@@ -490,7 +490,7 @@ body .bottom_bar{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    border-bottom: 1px solid rgb(194, 193, 193);
+    border-top: 1px solid rgb(194, 193, 193);
 }
 
 .confirm_back{
@@ -515,7 +515,7 @@ body .bottom_bar{
     margin-right: 0;
 }
 
-.box_value{
+.box_value, .box_value1{
     font-size: 17px;
     font-weight: 500;
     margin-top: auto;
@@ -548,4 +548,5 @@ body .bottom_bar{
 .page_3_open .page_3{
     bottom: 0;
 }
+
 

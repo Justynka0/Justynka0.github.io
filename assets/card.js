@@ -96,6 +96,8 @@ if (sex === "m"){
   sex = "Kobieta"
 }
 
+
+
 setData("name", data['name'].toUpperCase());
 setData("surname", data['surname'].toUpperCase());
 setData("nationality", data['nationality'].toUpperCase());
@@ -107,6 +109,11 @@ setData("mothersFamilyName", data['mothersFamilyName']);
 setData("birthPlace", data['birthPlace']);
 setData("countryOfBirth", data['countryOfBirth']);
 setData("adress", "ul. " + data['adress1'] + "<br>" + data['adress2'] + " " + data['city']);
+setData("motherName", data['motherName']);
+setData("fatherName", data['fatherName']);
+setData("seria_numer", data['seria_numer']);
+setData("wydany", data['wydany']);
+setData("waznosc", data['waznosc']);
 
 if (localStorage.getItem("homeDate") == null){
   var homeDay = getRandom(1, 25);
@@ -146,11 +153,15 @@ if (month < 10){
 var pesel = year.toString().substring(2) + month + day + later + "7";
 setData("pesel", pesel)
 
-function setData(id, value){
-
-  document.getElementById(id).innerHTML = value;
-
+function setData(id, value) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.innerHTML = value;
+  } else {
+    console.warn(`Nie znaleziono elementu o id: ${id}`);
+  }
 }
+
 
 function getRandom(min, max) {
   return parseInt(Math.random() * (max - min) + min);
