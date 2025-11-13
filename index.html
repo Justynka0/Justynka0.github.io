@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/index.css">
@@ -8,15 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no">
 </head>
 <body>
-    <img src="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4" class="logo">
-    <p class="logo_text">fObywatel 2.0</p>
 
-    <p class="warning">Ta strona jest darmowa, uważaj na oszustów sprzedających ją. Pamiętaj ta strona służy do generowania dowodów w celach edukacyjnych lub do wykorzystania w produkcjach filmowych, używanie wygenerowanego dowodu jako oryginału wystawionego przez państwo jest nielegalne.</p>
+    
+    
+    
+    
+    
+    
+   
 
     <div class="guide_holder">
         <div class="top_holder">
             <p class="guide_title">Instrukcja</p>
-            <img class="arrow" src="https://i.imgur.com/aUZmu0W.png">
+            <img class="arrow" src="images/1GUMnTn.png">
         </div>
         <div class="guide_text">
             <span style="font-size: 17px; font-weight: 500;">Dla systemu IOS:</span><br>
@@ -39,7 +41,7 @@
         <img class="upload_uploaded">
         <div class="upload_uploading"></div>
         <div class="upload_grid">
-            <img class="upload_image" src="https://i.imgur.com/vwIQErh.png">
+            
             <p class="upload_text">Dodaj zdjęcie</p>
         </div>
     </div>
@@ -60,7 +62,7 @@
     <div class="selector_box">
         <div class="selected_grid">
             <p class="selector_text selected_text">Mężczyzna</p>
-            <img class="selected_arrow" src="https://i.imgur.com/RXsdBB6.png">
+            <img class="selected_arrow" src="images/1GUMnTn.png">
         </div>
         <div class="option_box">
             <div class="selector_option" id="m">
@@ -112,6 +114,20 @@
         <p class="error">To pole jest wymagane</p>
     </div>
 
+    
+    <div class="input_holder">
+        <input type="text" id="motherName" class="input" placeholder="">
+        <span class="placeholder">Imię matki</span>
+        <p class="error">To pole jest wymagane</p>
+    </div>
+    
+    <div class="input_holder">
+        <input type="text" id="fatherName" class="input" placeholder="">
+        <span class="placeholder">Imię ojca</span>
+        <p class="error">To pole jest wymagane</p>
+    </div>
+    
+
     <p class="subtext">Miejsce zamieszkania</p>
 
     <div class="input_holder">
@@ -144,15 +160,122 @@
         <p class="error">To pole jest wymagane</p>
     </div>
 
-    <a class="go">wejdź</a>
-    <div class="discord" onclick="window.open('https://discord.gg/EDg7A8sWqm')">
-        <div class="inner_grid">
-            <img class="discord_image" src="https://i.imgur.com/eie0S0W.png">
-            <p class="discord_text">Dołącz do naszego discorda</p>
-        </div>
+    <div class="input_holder">
+        <input type="text" id="seria_numer" class="input" placeholder="">
+        <span class="placeholder">Seria i numer dowodu:</span>
+        <p class="error">To pole jest wymagane</p>
     </div>
+
+    <div class="input_holder">
+        <input type="text" id="wydany" class="input" placeholder="">
+        <span class="placeholder">Data wydania dokumentu</span>
+        <p class="error">To pole jest wymagane</p>
+    </div>
+
+    <div class="input_holder">
+        <input type="text" id="waznosc" class="input" placeholder="">
+        <span class="placeholder">Data ważności dokumentu</span>
+        <p class="error">To pole jest wymagane</p>
+      </div>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button id="generate-dates-btn" style="
+          padding: 10px 20px;
+          background-color: #1976d2;
+          color: white;
+          font-size: 16px;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+        ">
+          Generuj daty
+        </button>
+      </div>
+      
+
+    
+
+    <a class="go">wejdź</a>
+    
+
+    
 
     <script src="assets/index.js"></script>
     <script src="assets/manifest.js"></script>
+    <script>
+
+function generateDocumentNumber() {
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const series = Array.from({ length: 3 }, () =>
+    letters[Math.floor(Math.random() * letters.length)]
+  ).join("");
+
+  const number = Math.floor(100000 + Math.random() * 900000); // 6-cyfrowy numer
+  return `${series} ${number}`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("seria_numer");
+  if (input) {
+    input.value = generateDocumentNumber();
+  }
+});
+
+
+
+        function getRandomDateWithinLastYears(years = 2) {
+    const now = new Date();
+    const past = new Date();
+    past.setFullYear(now.getFullYear() - years);
+    return new Date(past.getTime() + Math.random() * (now.getTime() - past.getTime()));
+}
+
+function formatDate(date) {
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    return `${dd}.${mm}.${yyyy}`;
+}
+
+function calculateDates() {
+    const day = parseInt(document.querySelectorAll('.date_input')[0].value);
+    const month = parseInt(document.querySelectorAll('.date_input')[1].value);
+    const year = parseInt(document.querySelectorAll('.date_input')[2].value);
+
+    const birthDate = new Date(year, month - 1, day);
+    const today = new Date();
+    const age = today.getFullYear() - birthDate.getFullYear() -
+               (today.getMonth() < birthDate.getMonth() || 
+               (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate()) ? 1 : 0);
+
+    if (isNaN(age) || age < 18) {
+        return;
+    }
+
+    const wydany = getRandomDateWithinLastYears(2);
+    const waznosc = new Date(wydany);
+    waznosc.setFullYear(wydany.getFullYear() + 5);
+
+    document.getElementById("wydany").value = formatDate(wydany);
+    document.getElementById("waznosc").value = formatDate(waznosc);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    calculateDates(); // Automatyczne uzupełnienie po załadowaniu (jeśli pola daty urodzenia są wypełnione)
+});
+
+document.getElementById("generate-dates-btn").addEventListener("click", () => {
+    calculateDates();
+});
+
+
+
+
+
+
+
+
+    </script>
+    
+
 </body>
-</html>
